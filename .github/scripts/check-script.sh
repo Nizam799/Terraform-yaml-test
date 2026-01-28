@@ -6,7 +6,7 @@ git fetch origin "${{ github.base_ref }}:${{ github.base_ref }}"
 
 CHANGED=false
 # Get list of changed YAML files in the specific path
-CHANGED_FILES=$(git diff --name-only "${{ github.base_ref }}".."${{ github.head_ref }}" -- 'ansible-azure-aad/group/all/*.yaml')
+CHANGED_FILES=$(git diff --name-only "${{ github.base_ref }}".."${{ github.head_ref }}" -- 'ansible-aad/*.yaml')
 
 for FILE in $CHANGED_FILES; do
   # Extract gh_groups from base ref (fallback to empty if file didn't exist)
