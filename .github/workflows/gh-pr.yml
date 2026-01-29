@@ -12,6 +12,7 @@ on:
       - ".github/workflows/gh-team-pr.yml"
       - "modules/terraform-github-team/terraform-github-team"
       - "stacks/iam/github_team/**"
+      - "ansible-aad/*.yaml"
 
 permissions:
   id-token: write
@@ -19,8 +20,41 @@ permissions:
   pull-requests: write
 
 jobs:
-  plan:
+  Script:
+    name: Detect change scope
+    runs-on: ubuntu-latest
+    outputs:
+      only_ansible: ${{ steps.scope.outputs.only_ansible }}
+      gh_groups_changed: ${{ steps.gh.outputs.gh_groups_changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changed files
+        id: scope
+        run: |
+          git fetch origin main
+          FILES=$(git diff --name-only origin/main...HEAD)
+
+          echo "Changed files:"
+          echo "$FILES"
+
+          if echo "$FILES" | grep -qvE '^ansible-aad/.*\.yaml$'; then
+            echo "only_ansible=false" >> $GITHUB_OUTPUT
+          else
+            echo "only_ansible=true" >> $GITHUB_OUTPUT
+          fi
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: Add permissions
+        run : chmod +x /.github/scripts/check-script.sh
+      - name: Run scipt
+        id: gh
+        run: ./.github/scripts/check-script.sh
+
+   plan:
     name: Validate Terraform Plan (GitHub Teams)
+    needs: Script
+    if: needs.Script.outputs.only_ansible!='true' || needs.script.outputs.gh_groups_changed==true
     runs-on: ubuntu-latest
     environment: terraform-deployment-1_0-reader
     permissions:
@@ -51,6 +85,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Terraform Init
+       
         run: |
           terraform init
         env:
