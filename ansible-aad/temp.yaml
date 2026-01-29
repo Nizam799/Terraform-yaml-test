@@ -7,6 +7,8 @@ gh_groups:
     members:
       - username: brent-runkle_CPSI
         role: maintainer
+      - username: Nizam_CPSI
+        role: maintainer
 aad_groups:
   az-grp-crp-proddev-bytebenders-all:
     nested_groups:
@@ -15,6 +17,7 @@ aad_groups:
       - az-grp-crp-proddev-bytebenders-dev
       - az-grp-crp-proddev-bytebenders-github
       - az-grp-crp-proddev-bytebenders-qa
+      - az-grp-crp-proddev-bytebenders-prod
     users:
       - ashwini.chechare@trubridge.com
       - brent.runkle@trubridge.com
