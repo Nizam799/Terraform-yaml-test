@@ -17,6 +17,7 @@ aad_groups:
       - az-grp-crp-proddev-bravo-dev
       - az-grp-crp-proddev-bravo-github
       - az-grp-crp-proddev-bravo-qa
+      - az-grp-crp-prodmadhusss
     users:
       - mahesh.ramasamy@trubridge.com
       - patrick.peyton@trubridge.com
