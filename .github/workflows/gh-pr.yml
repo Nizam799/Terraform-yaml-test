@@ -28,7 +28,12 @@ jobs:
       gh_groups_changed: ${{ steps.gh.outputs.gh_groups_changed }}
     steps:
       - uses: actions/checkout@v4
-
+      - name: Print
+        run: |
+          echo "base_ref: ${{ github.base_ref }}"
+          echo "head_ref: ${{ github.head_ref }}"
+          echo "ref: ${{ github.ref }}"
+          
       - name: Detect changed files
         id: scope
         run: |
