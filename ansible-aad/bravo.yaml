@@ -13,7 +13,6 @@ aad_groups:
   az-grp-crp-proddev-bravo-all:
     nested_groups:
       - az-grp-crp-proddev-bravo-approvers
-      - az-grp-crp-proddev-bravo-ba
       - az-grp-crp-proddev-bravo-dev
       - az-grp-crp-proddev-bravo-github
       - az-grp-crp-proddev-bravo-qa
@@ -55,4 +54,5 @@ aad_groups:
       - sowmiya.arul@trubridge.com
       - subramanian.namasivayam@trubridge.com
       - thirumalaikumar.mahalingam@trubridge.com
+
       - vasu.chinnamani@trubridge.com
