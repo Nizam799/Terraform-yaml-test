@@ -3,7 +3,6 @@ set -euo pipefail
 
 git fetch origin main:origin/main
 
-# 1️⃣ Get all changed files in PR
 FILES=$(git diff --name-only origin/main..HEAD)
 
 echo "Changed files:"
@@ -21,6 +20,8 @@ fi
 GH_GROUPS_CHANGED=false
 
 YAML_FILES=$(echo "$FILES" | grep '^ansible-aad/.*\.yaml$' || true)
+
+echo "$YAMLFILES"
 
 for FILE in $YAML_FILES; do
   echo "Checking gh_groups diff for $FILE"
