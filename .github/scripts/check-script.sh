@@ -9,7 +9,6 @@ CHANGED=false
 CHANGED_FILES=$(git diff --name-only main..HEAD -- 'ansible-aad/*.yaml')
 
 for FILE in $CHANGED_FILES; do
-  # git show "${{ github.base_ref }}:$FILE" > base.yaml 2>/dev/null || echo "{}" > base.yaml
    git show "main:$FILE" > base.yaml 2>/dev/null || echo "{}" > base.yaml
    yq e '.gh_groups' base.yaml > base_gh.yaml
    
