@@ -26,17 +26,12 @@ echo "gh_files: $GH_FILES"
 for FILE in $GH_FILES; do
   echo "Checking gh_groups diff for $FILE"
 
-  # Base version
   git show "origin/main:$FILE" > base.yaml 2>/dev/null || echo "{}" > base.yaml
-
-  # Head version
   cat "$FILE" > head.yaml
 
-  # Extract gh_groups
   yq e '.gh_groups' base.yaml > base_gh.yaml
   yq e '.gh_groups' head.yaml > head_gh.yaml
 
-  # Normalize (order-independent)
   yq e -P 'sort_keys(..)' base_gh.yaml > base_norm.yaml
   yq e -P 'sort_keys(..)' head_gh.yaml > head_norm.yaml
 
