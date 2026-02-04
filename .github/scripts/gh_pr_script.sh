@@ -3,6 +3,7 @@ set -euo pipefail
 
 git fetch origin main:origin/main
 RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/workflows/gh-pr\.yml|modules/terraform-github-team/terraform-github-team|stacks/iam/github_team/|ansible-aad/.*\.yaml$)'
+
 MODE="${MODE:-}"
 if [[ "$MODE" == "PR" ]]; then
   TRIFILES=$(git diff --name-only origin/main..HEAD)
@@ -47,5 +48,4 @@ for FILE in $GH_FILES; do
     break
   fi
 done
-
 echo "gh_groups_changed=$GH_GROUPS_CHANGED" >> "$GITHUB_OUTPUT"
