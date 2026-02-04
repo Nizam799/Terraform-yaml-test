@@ -24,7 +24,6 @@ aad_groups:
       - evan.mitchell@trubridge.com
       - jacob.olier@trubridge.com
       - marshal.thompson@trubridge.com
-      - sachin.sonar@trubridge.com
       - shubham.kumar@trubridge.com
   az-grp-crp-proddev-bytebenders-approvers:
     users:

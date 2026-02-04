@@ -10,6 +10,7 @@ RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/w
 # CHANGED_FILES=$(git diff --name-only "${{ github.base_ref }}".."${{ github.head_ref }}" -- 'ansible-aad/*.yaml')
 CHANGED_FILES=$(git diff --name-only main..HEAD -- 'ansible-aad/*.yaml')
 RELEVANT_FILES=$(echo "$FILES" | grep -E "$RELEVANT_PATHS_REGEX" || true)
+echo "$RELEVANT_FILES"
 
 for FILE in $CHANGED_FILES; do
    git show "main:$FILE" > base.yaml 2>/dev/null || echo "{}" > base.yaml
