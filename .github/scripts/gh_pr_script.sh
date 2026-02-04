@@ -2,7 +2,7 @@
 set -euo pipefail
 
 git fetch origin main:origin/main
-RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/workflows/gh-team-pr\.yml|modules/terraform-github-team/terraform-github-team|stacks/iam/github_team/|ansible-azure-aad/group/all/.*\.yaml$)'
+RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/workflows/gh-pr\.yml|modules/terraform-github-team/terraform-github-team|stacks/iam/github_team/|ansible-aad/.*\.yaml$)'
 
 TRIFILES=$(git diff --name-only origin/main..HEAD)
 
