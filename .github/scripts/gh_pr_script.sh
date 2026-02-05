@@ -2,9 +2,16 @@
 set -euo pipefail
 
 git fetch origin main:origin/main
-RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/workflows/gh-team-pr\.yml|modules/terraform-github-team/terraform-github-team|stacks/iam/github_team/|ansible-azure-aad/group/all/.*\.yaml$)'
+RELEVANT_PATHS_REGEX='^(deployments/cpsi/global/iam/core_github_team/|\.github/workflows/gh-pr\.yml|modules/terraform-github-team/terraform-github-team|stacks/iam/github_team/|ansible-aad/.*\.yaml$)'
 
-TRIFILES=$(git diff --name-only origin/main..HEAD)
+MODE="${MODE:-}"
+if [[ "$MODE" == "PR" ]]; then
+  TRIFILES=$(git diff --name-only origin/main..HEAD)
+  echo "Running PR Workflow"
+elif [[ "$MODE" == "MAIN" ]]; then
+  TRIFILES=$(git diff --name-only HEAD~1..HEAD)
+  echo "Running Main Apply Workflow"
+fi
 
 echo "Changed files:"
 echo "$TRIFILES"
@@ -42,5 +49,4 @@ for FILE in $GH_FILES; do
     break
   fi
 done
-
 echo "gh_groups_changed=$GH_GROUPS_CHANGED" >> "$GITHUB_OUTPUT"
