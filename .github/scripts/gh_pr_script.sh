@@ -28,7 +28,7 @@ fi
 
 GH_GROUPS_CHANGED=false
 
-GH_FILES=$(echo "$FILES" | grep '^ansible-aad/.*\.yaml$' || true)
+GH_FILES=$(echo "$RELEVANT_FILES" | grep '^ansible-aad/.*\.yaml$' || true)
 
 echo "gh_files: $GH_FILES"
 
