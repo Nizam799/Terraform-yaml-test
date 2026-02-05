@@ -50,7 +50,7 @@ for FILE in $GH_FILES; do
 
   if ! diff -q base_norm.yaml head_norm.yaml >/dev/null; then
     GH_GROUPS_CHANGED=true
-    echo "gh_groups_changed"
+    echo "gh_groups - changed"
     break
   fi
 done
